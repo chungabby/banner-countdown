@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>It's Saturday — Doing Nothing 倒數 Banner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- 英文字體：Adobe Fonts「collier」 -->
+  <link rel="stylesheet" href="https://use.typekit.net/uzq8cud.css">
+  <style>
+    :root {
+      /* ══════════ 顏色設定 ══════════ */
+      --bg: #e6e0d7;               /* 圖片載入前的底色 */
+      --text: #ffffff;             /* 白色文字 */
+      --dark: #3a3a38;             /* 開賣時間＋倒數的深色文字 */
+
+      /* ══════════ 字型設定 ══════════ */
+      --font-en: "collier", serif;               /* 英文 */
+      --font-zh: 'Noto Sans TC', sans-serif;     /* 中文 */
+
+      /* ══════════ 文字大小（單位 = 設計稿上的 px，畫面縮放時自動等比例） ══════════ */
+      --eyebrow-size: 25;          /* 第一行「珊珊來遲的新品」 */
+      --eyebrow-en: 1.3em;         /* 第一行的英文「Last Summer」（相對中文的倍數） */
+      --title-size: 72;            /* 大標題「Doing Nothing」 */
+      --sub-size: 35;              /* 「系列新登場」 */
+      --offer-size: 35;            /* 底部「新品 9 折・套組 88 折起」 */
+      --date-size: 26;             /* 「10/16 Fri. 12:00 開賣」 */
+      --cd-size: 45;               /* 倒數的中文「天／時／分」 */
+      --cd-num: 1.42em;            /* 倒數的數字（相對中文的倍數） */
+
+      /* ══════════ 倒數設定 ══════════ */
+      /* 開賣時間寫在最下面的 script 裡：TARGET = "2026-10-16T12:00:00+08:00" */
+
+      /* ══════════ 文字位置（設計稿上的 px） ══════════ */
+      --head-top: 103;             /* 手機：第一行文字距離頂端 */
+      --offer-bottom: 126;         /* 手機：底部文字距離底端 */
+
+      /* ══════════ 版面設定 ══════════ */
+      --height-pc: 600px;          /* 電腦版高度 */
+      --height-tab: 740px;         /* 平板版高度 */
+      --ratio-m: 800 / 1100;       /* 手機版比例（800×1100） */
+      --focus-pc: center;          /* 電腦／平板圖片裁切重心 */
+      --focus-m: center;           /* 手機圖片裁切重心 */
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--bg);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== 外框：一張底圖鋪滿 ===== */
+    .banner {
+      position: relative;
+      aspect-ratio: var(--ratio-m);
+      width: 100%;
+      background: var(--bg);
+    }
+    .banner img {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--focus-m);
+      color: transparent;
+      background: var(--bg);
+    }
+
+    /* ===== 文字區：疊在底圖上，依設計稿等比例縮放 ===== */
+    .copy-area {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      container-type: size;
+    }
+    .copy {
+      --u: calc(100cqw / 800);     /* 手機：設計稿寬 800px */
+      position: absolute;
+      inset: 0;
+      color: var(--text);
+      font-family: var(--font-zh);
+      font-weight: 400;
+      text-align: center;
+    }
+    .copy .line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* 第一行：Last Summer 珊珊來遲的新品 */
+    .eyebrow {
+      top: calc((var(--head-top) - 2) * var(--u));
+      font-size: calc(var(--eyebrow-size) * var(--u));
+      letter-spacing: 0.12em;
+      padding-left: 0.12em;        /* 抵銷字距，讓置中更準 */
+    }
+    .eyebrow .en {
+      font-family: var(--font-en);
+      font-size: var(--eyebrow-en);
+      font-weight: 400;
+      line-height: 0;
+      letter-spacing: 0.02em;
+    }
+
+    /* 大標題：Doing Nothing */
+    .title {
+      top: calc((var(--head-top) + 41) * var(--u));
+      font-family: var(--font-en);
+      font-size: calc(var(--title-size) * var(--u));
+      font-weight: 300;
+      letter-spacing: 0;
+    }
+
+    /* 系列新登場 */
+    .sub {
+      top: calc((var(--head-top) + 134) * var(--u));
+      font-size: calc(var(--sub-size) * var(--u));
+      letter-spacing: 0.11em;
+      padding-left: 0.11em;
+    }
+
+    /* 開賣時間：10/16 Fri. 12:00 開賣 */
+    .date {
+      top: calc((var(--head-top) + 215) * var(--u));
+      color: var(--dark);
+      font-size: calc(var(--date-size) * var(--u));
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      word-spacing: 0.3em;
+      padding-left: 0.05em;
+    }
+
+    /* 倒數：3天24時24分 */
+    .countdown {
+      top: calc((var(--head-top) + 266) * var(--u));
+      color: var(--dark);
+      font-size: calc(var(--cd-size) * var(--u));
+      font-weight: 300;
+    }
+    .countdown .num {
+      font-family: var(--font-en);
+      font-size: var(--cd-num);
+      font-weight: 300;
+      line-height: 0;
+      font-variant-numeric: lining-nums tabular-nums;   /* 數字等寬，跳動時不會左右晃 */
+    }
+    .countdown .unit {
+      margin-left: 0.22em;
+    }
+    .countdown .unit + .num {
+      margin-left: 0.22em;
+    }
+    .countdown [hidden] {
+      display: none;
+    }
+    .countdown .live {
+      letter-spacing: 0.15em;
+      padding-left: 0.15em;
+    }
+
+    /* 底部：新品 9 折・套組 88 折起 */
+    .offer {
+      bottom: calc(var(--offer-bottom) * var(--u));
+      font-size: calc(var(--offer-size) * var(--u));
+      letter-spacing: 0.1em;
+      padding-left: 0.1em;
+    }
+
+    /* ===== 平板＋電腦（768px 以上）：依高度縮放（設計稿高 1000px） ===== */
+    @media (min-width: 768px) {
+      :root {
+        --head-top: 60;            /* 電腦：第一行文字距離頂端 */
+        --offer-bottom: 89;        /* 電腦：底部文字距離底端 */
+        --scale-pc: 0.9;           /* 電腦：文字整體縮放（讓倒數不壓到蠟燭） */
+      }
+      .banner img {
+        object-position: var(--focus-pc);
+      }
+      .copy {
+        --u: calc(100cqh / 1000 * var(--scale-pc));
+      }
+    }
+
+    /* ===== 平板（768–1023px）：高度 740px ===== */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .banner {
+        aspect-ratio: auto;
+        height: var(--height-tab);
+      }
+    }
+
+    /* ===== 電腦（1024px 以上）：高度 600px ===== */
+    @media (min-width: 1024px) {
+      .banner {
+        aspect-ratio: auto;
+        height: var(--height-pc);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+
+    <picture>
+      <!-- 手機版底圖（800×1100） -->
+      <source media="(max-width: 767px)" srcset="https://ik.imagekit.io/itssaturday/banner/1012-banner-summer-m.jpg">
+      <!-- 電腦／平板底圖（2400×1000） -->
+      <img src="https://ik.imagekit.io/itssaturday/banner/1012-banner-summer.jpg" alt="Doing Nothing 系列水泥香氛蠟燭">
+    </picture>
+
+    <div class="copy-area">
+      <div class="copy">
+        <p class="line eyebrow"><span class="en">Last Summer</span> 珊珊來遲的新品</p>
+        <h2 class="line title">Doing Nothing</h2>
+        <p class="line sub">系列新登場</p>
+        <p class="line date">10/16 Fri. 12:00 開賣</p>
+        <p class="line countdown" id="isp-cd" aria-live="polite"><span class="num" data-d>3</span><span class="unit">天</span><span class="num" data-h>24</span><span class="unit">時</span><span class="num" data-m>24</span><span class="unit">分</span><span class="num" data-s hidden>00</span><span class="unit" data-s-unit hidden>秒</span></p>
+        <p class="line offer">新品 9 折 · 套組 88 折起</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* ══════════ 倒數計時：開賣時間（台灣時間） ══════════ */
+    (function () {
+      var TARGET = new Date("2026-10-16T12:00:00+08:00").getTime();
+      var LIVE_TEXT = "現正開賣中";            /* 時間到之後顯示的文字 */
+      var SECONDS_FROM = 24 * 60 * 60 * 1000;  /* 剩多少時間開始顯示秒數：最後 1 天 */
+
+      var el = document.getElementById("isp-cd");
+      var d = el.querySelector("[data-d]"), h = el.querySelector("[data-h]"), m = el.querySelector("[data-m]");
+      var s = el.querySelector("[data-s]"), sUnit = el.querySelector("[data-s-unit]");
+      var dUnit = d.nextElementSibling;
+      function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+      function tick() {
+        var left = TARGET - Date.now();
+        if (left <= 0) {
+          el.innerHTML = '<span class="live">' + LIVE_TEXT + '</span>';
+          clearInterval(timer);
+          return;
+        }
+        var lastDay = left <= SECONDS_FROM;
+        if (lastDay) {
+          /* 最後一天：時／分／秒 */
+          var secs = Math.ceil(left / 1000);
+          h.textContent = pad(Math.floor(secs / 3600));
+          m.textContent = pad(Math.floor((secs % 3600) / 60));
+          s.textContent = pad(secs % 60);
+        } else {
+          /* 一天以上：天／時／分（分鐘無條件進位） */
+          var mins = Math.ceil(left / 60000);
+          d.textContent = Math.floor(mins / 1440);
+          h.textContent = pad(Math.floor((mins % 1440) / 60));
+          m.textContent = pad(mins % 60);
+        }
+        d.hidden = dUnit.hidden = lastDay;
+        s.hidden = sUnit.hidden = !lastDay;
+      }
+      var timer = setInterval(tick, 1000);
+      tick();
+    })();
+
+    /* 把內容的實際高度回報給 BVShop 頁面，讓框框高度自動剛好 */
+    (function () {
+      var last = 0;
+      function report() {
+        var h = document.querySelector(".banner").offsetHeight;
+        if (h && h !== last) {
+          last = h;
+          window.parent.postMessage({ ispBannerHeight: h, ispBannerId: "isp-summer-countdown" }, "*");
+        }
+      }
+      window.addEventListener("load", report);
+      window.addEventListener("resize", report);
+      Array.prototype.forEach.call(document.images, function (img) {
+        img.addEventListener("load", report);
+      });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
+      report();
+      setTimeout(report, 500);
+      setTimeout(report, 1500);
+    })();
+  </script>
+</body>
+</html>
